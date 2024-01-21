@@ -17,7 +17,7 @@ export default function Home() {
   };
 
   return (
-    <main className="p-8 space-y-4">
+    <main className="space-y-4">
       <Composer onSubmit={addNewPost} isLoading={postFeed.isPending} />
       {feed?.map((post, index) => (
         <React.Fragment key={post.id}>
