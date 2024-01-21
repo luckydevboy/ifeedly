@@ -7,6 +7,5 @@ export type Post = {
     likes: number;
     comments: number;
   };
-  image_url: string;
   username: string;
 };

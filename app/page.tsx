@@ -1,14 +1,29 @@
-import { Card } from "@/app/components";
-import { feed } from "@/app/data";
+"use client";
+
+import { Card, Composer } from "@/app/components";
+import React from "react";
+import { useGetFeed, usePostFeed } from "@/app/apis/hooks";
+import toast from "react-hot-toast";
 
 export default function Home() {
+  const { data: feed, refetch } = useGetFeed();
+  const postFeed = usePostFeed();
+
+  const addNewPost = (content: string) => {
+    postFeed.mutateAsync({ content }).then(() => {
+      toast.success("Your post successfully sent.");
+      refetch();
+    });
+  };
+
   return (
-    <main className="p-8">
-      {feed.map((post, index) => (
-        <>
-          {index !== 0 && <hr className="my-4 border-gray-200" />}
-          <Card key={post.id} {...post} />
-        </>
+    <main className="p-8 space-y-4">
+      <Composer onSubmit={addNewPost} isLoading={postFeed.isPending} />
+      {feed?.map((post, index) => (
+        <React.Fragment key={post.id}>
+          {index !== 0 && <hr className="border-zinc-200" />}
+          <Card {...post} />
+        </React.Fragment>
       ))}
     </main>
   );
