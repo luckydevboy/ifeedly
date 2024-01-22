@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
 import "./globals.css";
-import { ReactQueryProvider } from "@/app/lib/providers";
+import {
+  NextAuthSessionProvider,
+  ReactQueryProvider,
+} from "@/app/lib/providers";
 import { Toaster } from "react-hot-toast";
 import Layout from "@/app/components/layout";
 
@@ -20,9 +23,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={nunito.className}>
-        <ReactQueryProvider>
-          <Layout>{children}</Layout>
-        </ReactQueryProvider>
+        <NextAuthSessionProvider>
+          <ReactQueryProvider>
+            <Layout>{children}</Layout>
+          </ReactQueryProvider>
+        </NextAuthSessionProvider>
         <Toaster />
       </body>
     </html>
