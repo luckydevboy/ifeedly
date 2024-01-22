@@ -1,12 +1,17 @@
 import { axios } from "../axiosInstance";
-import { Post } from "@/app/lib/definitions";
+import { Post, Response } from "@/app/lib/definitions";
 import { AxiosResponse } from "axios";
 
-export async function getFeed(): Promise<AxiosResponse<Post[]>> {
-  return await axios.get("/feed");
+export async function getFeed({
+  page,
+  pageSize,
+}: {
+  page: number;
+  pageSize: number;
+}): Promise<AxiosResponse<Response<Post[]>>> {
+  return await axios.get("/feed", { params: { page, pageSize } });
 }
 
-export async function postFeed(post: Omit<Post, "id" | "reactions">) {
-  console.log({ content: post.content });
-  return await axios.post("/feed", { content: post.content });
+export async function postFeed(content: string) {
+  return await axios.post("/feed", { content });
 }

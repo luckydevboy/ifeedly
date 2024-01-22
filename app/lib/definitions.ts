@@ -9,3 +9,10 @@ export type Post = {
   };
   username: string;
 };
+
+export type Response<T> = {
+  data: T;
+  pageSize: number;
+  currentPage: number;
+  total: number;
+}
