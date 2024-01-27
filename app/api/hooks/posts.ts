@@ -1,5 +1,5 @@
 import { useInfiniteQuery, useMutation } from "@tanstack/react-query";
-import { getPosts, createPost } from "../https";
+import { getPosts, createPost, likePost } from "../https";
 
 export function useGetPosts() {
   const pageSize = 10;
@@ -29,3 +29,9 @@ export function useCreatePost() {
     mutationFn: (content: string) => createPost(content),
   });
 }
+
+export const useLikePost = () => {
+  return useMutation({
+    mutationFn: (id: string) => likePost(id),
+  });
+};

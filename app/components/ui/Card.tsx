@@ -2,15 +2,38 @@ import { Post } from "@/app/lib/definitions";
 import { formatDistanceToNow } from "date-fns";
 import {
   ChatBubbleLeftRightIcon,
-  HeartIcon,
+  HeartIcon as HeartIconOutline,
 } from "@heroicons/react/24/outline";
+import { HeartIcon as HeartIconSolid } from "@heroicons/react/24/solid";
+import { useState } from "react";
+import { useLikePost } from "@/app/api/hooks";
+import { cx } from "class-variance-authority";
 
 export default function Card({
   content,
   reactions,
   updatedAt,
   author,
-}: Omit<Post, "id">) {
+  _id,
+}: Post) {
+  const [likes, setLikes] = useState(reactions.likes);
+  const [liked, setLiked] = useState(reactions.isLiked);
+  const likePost = useLikePost();
+
+  const handleLike = () => {
+    if (liked) {
+      likePost.mutateAsync(_id).then(() => {
+        setLikes(likes - 1);
+        setLiked(false);
+      });
+    } else {
+      likePost.mutateAsync(_id).then(() => {
+        setLikes(likes + 1);
+        setLiked(true);
+      });
+    }
+  };
+
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-x-2">
@@ -27,10 +50,22 @@ export default function Card({
       </div>
       <div className="text-zinc-800">{content}</div>
       <div className="flex items-center gap-x-4">
-        <div className="flex items-center gap-x-1">
-          <HeartIcon className="text-davysGray h-4 w-4" />
-          <span className="text-davysGray text-sm font-medium">
-            {reactions.likes}
+        <div
+          className="flex items-center gap-x-1 cursor-pointer"
+          onClick={handleLike}
+        >
+          {liked ? (
+            <HeartIconSolid className="h-4 w-4 text-coquelicot" />
+          ) : (
+            <HeartIconOutline className="h-4 w-4 text-davysGray" />
+          )}
+          <span
+            className={cx([
+              "text-sm font-medium",
+              liked ? "text-coquelicot" : "text-davysGray",
+            ])}
+          >
+            {likes}
           </span>
         </div>
         <div className="flex items-center gap-x-1">

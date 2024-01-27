@@ -15,6 +15,7 @@ const config: Config = {
       seaSalt: "#F7F7F7",
       white: "#ffffff",
       antiFlashWhite: "#F0F0F0",
+      coquelicot: "#ff5d2b",
     },
   },
   plugins: [],

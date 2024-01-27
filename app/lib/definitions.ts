@@ -4,6 +4,7 @@ export type Post = {
   content: string;
   reactions: {
     likes: number;
+    isLiked?: boolean;
   };
   author: {
     username: string;
