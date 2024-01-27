@@ -1,5 +1,5 @@
 import { useInfiniteQuery, useMutation } from "@tanstack/react-query";
-import { getPosts, createPost } from "@/app/apis/https";
+import { getPosts, createPost } from "../https";
 
 export function useGetPosts() {
   const pageSize = 10;

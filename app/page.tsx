@@ -2,7 +2,7 @@
 
 import { Card, Composer } from "@/app/components";
 import React from "react";
-import { useGetPosts, useCreatePost } from "@/app/apis/hooks";
+import { useGetPosts, useCreatePost } from "@/app/api/hooks";
 import toast from "react-hot-toast";
 import { Post } from "@/app/lib/definitions";
 import InfiniteScroll from "react-infinite-scroll-component";
