@@ -1,18 +1,18 @@
 import { useInfiniteQuery, useMutation } from "@tanstack/react-query";
-import { getFeed, postFeed } from "@/app/apis/https/feed";
+import { getPosts, createPost } from "@/app/apis/https";
 
-export function useGetFeed() {
+export function useGetPosts() {
   const pageSize = 10;
   return useInfiniteQuery({
     initialPageParam: 1,
-    queryKey: ["feed"],
-    queryFn: ({ pageParam }) => getFeed({ page: Number(pageParam), pageSize }),
+    queryKey: ["posts"],
+    queryFn: ({ pageParam }) => getPosts({ page: Number(pageParam), pageSize }),
     getNextPageParam: (lastPage, allPages) => {
       const currentTotal = allPages.reduce(
-        (acc, curr) => curr.data.data.length + acc,
+        (acc, curr) => curr.data.data.items.length + acc,
         0,
       );
-      const totalCount = lastPage.data.total;
+      const totalCount = lastPage.data.data.total;
 
       if (currentTotal < totalCount) {
         const pageNumber = currentTotal / pageSize;
@@ -24,8 +24,8 @@ export function useGetFeed() {
   });
 }
 
-export function usePostFeed() {
+export function useCreatePost() {
   return useMutation({
-    mutationFn: (content: string) => postFeed(content),
+    mutationFn: (content: string) => createPost(content),
   });
 }

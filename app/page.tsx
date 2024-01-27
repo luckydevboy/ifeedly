@@ -2,7 +2,7 @@
 
 import { Card, Composer } from "@/app/components";
 import React from "react";
-import { useGetFeed, usePostFeed } from "@/app/apis/hooks";
+import { useGetPosts, useCreatePost } from "@/app/apis/hooks";
 import toast from "react-hot-toast";
 import { Post } from "@/app/lib/definitions";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -10,16 +10,16 @@ import { BeatLoader } from "react-spinners";
 
 export default function Home() {
   const { data, isFetching, hasNextPage, fetchNextPage, refetch } =
-    useGetFeed();
-  const postFeed = usePostFeed();
+    useGetPosts();
+  const createPost = useCreatePost();
 
-  const feed = data?.pages.reduce(
-    (acc: Post[], page) => acc.concat(page.data.data),
+  const posts = data?.pages.reduce(
+    (acc: Post[], page) => acc.concat(page.data.data.items),
     [],
   );
 
   const addNewPost = (content: string) => {
-    postFeed.mutateAsync(content).then(() => {
+    createPost.mutateAsync(content).then(() => {
       toast.success("Your post successfully sent.");
       refetch();
     });
@@ -27,14 +27,14 @@ export default function Home() {
 
   return (
     <main className="space-y-4">
-      <Composer onSubmit={addNewPost} isLoading={postFeed.isPending} />
+      <Composer onSubmit={addNewPost} isLoading={createPost.isPending} />
       {isFetching && (
         <div className="text-center">
           <BeatLoader size={10} color="#3b82f6" className="my-4" />
         </div>
       )}
       <InfiniteScroll
-        dataLength={feed?.length || 0}
+        dataLength={posts?.length || 0}
         next={fetchNextPage}
         hasMore={hasNextPage}
         loader={
@@ -46,8 +46,8 @@ export default function Home() {
         }
         className="space-y-4"
       >
-        {feed?.map((post, index) => (
-          <React.Fragment key={post.id}>
+        {posts?.map((post, index) => (
+          <React.Fragment key={post._id}>
             {index !== 0 && <hr className="border-zinc-200" />}
             <Card {...post} />
           </React.Fragment>

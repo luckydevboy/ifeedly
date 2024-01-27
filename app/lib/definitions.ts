@@ -1,21 +1,21 @@
 export type Post = {
-  id: string;
-  created_time: string;
+  _id: string;
+  updatedAt: string;
   content: string;
   reactions: {
     likes: number;
-    comments: number;
   };
-  user: {
-    id: string;
+  author: {
     username: string;
-    name: string;
   };
 };
 
 export type Response<T> = {
-  data: T;
-  pageSize: number;
-  currentPage: number;
-  total: number;
+  status: string;
+  data: {
+    items: T;
+    currentPage: number;
+    pageSize: number;
+    total: number;
+  };
 };

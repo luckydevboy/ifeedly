@@ -14,9 +14,9 @@ const options: AuthOptions = {
       async authorize(credentials) {
         try {
           const data = await axios.post("/auth/login", credentials);
-          if (data.data.token) {
+          if (data.data.data.token) {
             // Any object returned will be saved in `user` property of the JWT
-            return data.data.token;
+            return data.data.data.token;
           } else {
             return null;
           }
