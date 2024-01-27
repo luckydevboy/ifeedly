@@ -30,7 +30,7 @@ export default function Home() {
       <Composer onSubmit={addNewPost} isLoading={createPost.isPending} />
       {isFetching && (
         <div className="text-center">
-          <BeatLoader size={10} color="#3b82f6" className="my-4" />
+          <BeatLoader size={10} color="#7090E8" className="my-4" />
         </div>
       )}
       <InfiniteScroll
@@ -40,7 +40,7 @@ export default function Home() {
         loader={
           isFetching && (
             <div className="text-center">
-              <BeatLoader size={10} color="#3b82f6" className="my-4" />
+              <BeatLoader size={10} color="#7090E8" className="my-4" />
             </div>
           )
         }
@@ -48,7 +48,7 @@ export default function Home() {
       >
         {posts?.map((post, index) => (
           <React.Fragment key={post._id}>
-            {index !== 0 && <hr className="border-zinc-200" />}
+            {index !== 0 && <hr className="border-seaSalt" />}
             <Card {...post} />
           </React.Fragment>
         ))}

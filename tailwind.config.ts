@@ -7,7 +7,15 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    colors: {
+      cornflowerBlue: "#7090E8",
+      davysGray: "#4E5358",
+      vistaBlue: "#93ABED",
+      ghostWhite: "#F1F4FD",
+      seaSalt: "#F7F7F7",
+      white: "#ffffff",
+      antiFlashWhite: "#F0F0F0",
+    },
   },
   plugins: [],
 };

@@ -29,7 +29,7 @@ export default function Composer({ onSubmit, isLoading }: Props) {
   };
 
   return (
-    <div className="bg-zinc-100 rounded-lg px-6 py-4 flex flex-col">
+    <div className="bg-seaSalt rounded-lg px-6 py-4 flex flex-col">
       {isClient && (
         <Editor
           editorState={editorState}
@@ -39,7 +39,7 @@ export default function Composer({ onSubmit, isLoading }: Props) {
       )}
       <button
         className={cx([
-          "bg-blue-500 p-2 rounded-full self-end disabled:bg-blue-500/40 relative",
+          "bg-cornflowerBlue p-2 rounded-full self-end disabled:bg-cornflowerBlue/40 relative",
           isLoading && "animate-pulse",
         ])}
         disabled={!text}

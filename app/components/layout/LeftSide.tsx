@@ -7,7 +7,6 @@ import { usePathname } from "next/navigation";
 
 export default function LeftSide({ className }: { className?: string }) {
   const pathname = usePathname();
-  console.log(pathname);
   return (
     <aside className={cx([className, "px-4 space-y-4"])}>
       <Link
@@ -15,8 +14,8 @@ export default function LeftSide({ className }: { className?: string }) {
         className={cx([
           "flex items-center gap-x-3  px-4 py-2",
           pathname === "/"
-            ? "bg-blue-100 text-blue-500 rounded-lg"
-            : "text-zinc-500",
+            ? "bg-ghostWhite text-cornflowerBlue rounded-lg"
+            : "text-davysGray",
         ])}
       >
         <HomeIcon className="w-6 h-6" />
