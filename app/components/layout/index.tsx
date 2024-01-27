@@ -8,9 +8,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <div>
       <Header />
       <div className="p-6 lg:p-0 lg:grid grid-cols-5 gap-6 lg:py-6">
-        <LeftSide className="col-span-1" />
+        <LeftSide className="col-span-1 hidden lg:block" />
         <div className="col-span-3">{children}</div>
-        <RightSide className="col-span-1" />
+        <RightSide className="col-span-1 hidden lg:block" />
       </div>
     </div>
   );
