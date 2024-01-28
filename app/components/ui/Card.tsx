@@ -52,9 +52,9 @@ export default function Card({
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-x-2">
-        {/*<div className="font-bold text-sm overflow-hidden text-ellipsis whitespace-nowrap">*/}
-        {/*  {user.name}*/}
-        {/*</div>*/}
+        <div className="font-bold text-sm overflow-hidden text-ellipsis whitespace-nowrap">
+          {author.name}
+        </div>
         <div className="text-xs text-davysGray overflow-hidden text-ellipsis whitespace-nowrap">
           {author.username}
         </div>

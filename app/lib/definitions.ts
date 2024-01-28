@@ -9,6 +9,7 @@ export type Post = {
   };
   author: {
     username: string;
+    name: string;
   };
 };
 
