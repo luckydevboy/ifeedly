@@ -1,5 +1,6 @@
 export type Post = {
   _id: string;
+  createdAt: string;
   updatedAt: string;
   content: string;
   reactions: {

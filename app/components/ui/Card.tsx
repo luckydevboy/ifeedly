@@ -3,16 +3,18 @@ import { formatDistanceToNow } from "date-fns";
 import {
   ChatBubbleLeftRightIcon,
   HeartIcon as HeartIconOutline,
+  ShareIcon,
 } from "@heroicons/react/24/outline";
 import { HeartIcon as HeartIconSolid } from "@heroicons/react/24/solid";
 import { useState } from "react";
 import { useLikePost } from "@/app/api/hooks";
 import { cx } from "class-variance-authority";
+import toast from "react-hot-toast";
 
 export default function Card({
   content,
   reactions,
-  updatedAt,
+  createdAt,
   author,
   _id,
 }: Post) {
@@ -34,6 +36,19 @@ export default function Card({
     }
   };
 
+  const handleShare = async () => {
+    const url = `${process.env.NEXT_PUBLIC_URL}/posts/${_id}`;
+    try {
+      await navigator.share({
+        title: `Post by ${author}`,
+        url,
+      });
+    } catch (error) {
+      await navigator.clipboard.writeText(url);
+      toast.success("Copied to clipboard.");
+    }
+  };
+
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-x-2">
@@ -45,7 +60,7 @@ export default function Card({
         </div>
         <div className="text-xs text-davysGray">&#9679;</div>
         <div className="text-xs text-davysGray overflow-hidden text-ellipsis whitespace-nowrap">
-          {formatDistanceToNow(updatedAt)}
+          {formatDistanceToNow(createdAt)}
         </div>
       </div>
       <div className="text-zinc-800">{content}</div>
@@ -74,6 +89,10 @@ export default function Card({
             {/*{reactions.comments}*/}0
           </span>
         </div>
+        <ShareIcon
+          className="text-davysGray h-4 w-4 cursor-pointer"
+          onClick={handleShare}
+        />
       </div>
     </div>
   );
