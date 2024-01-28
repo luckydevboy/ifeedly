@@ -50,49 +50,56 @@ export default function Card({
   };
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center gap-x-2">
-        <div className="font-bold text-sm overflow-hidden text-ellipsis whitespace-nowrap">
-          {author.name}
+    <div className="flex gap-x-2">
+      <img
+        src={author.image}
+        alt="Avatar"
+        className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0"
+      />
+      <div className="space-y-4">
+        <div className="flex items-center gap-x-2">
+          <div className="font-bold text-sm overflow-hidden text-ellipsis whitespace-nowrap">
+            {author.name}
+          </div>
+          <div className="text-xs text-davysGray overflow-hidden text-ellipsis whitespace-nowrap">
+            {author.username}
+          </div>
+          <div className="text-xs text-davysGray">&#9679;</div>
+          <div className="text-xs text-davysGray overflow-hidden text-ellipsis whitespace-nowrap">
+            {formatDistanceToNow(createdAt)}
+          </div>
         </div>
-        <div className="text-xs text-davysGray overflow-hidden text-ellipsis whitespace-nowrap">
-          {author.username}
-        </div>
-        <div className="text-xs text-davysGray">&#9679;</div>
-        <div className="text-xs text-davysGray overflow-hidden text-ellipsis whitespace-nowrap">
-          {formatDistanceToNow(createdAt)}
-        </div>
-      </div>
-      <div className="text-zinc-800">{content}</div>
-      <div className="flex items-center gap-x-4">
-        <div
-          className="flex items-center gap-x-1 cursor-pointer"
-          onClick={handleLike}
-        >
-          {liked ? (
-            <HeartIconSolid className="h-4 w-4 text-coquelicot" />
-          ) : (
-            <HeartIconOutline className="h-4 w-4 text-davysGray" />
-          )}
-          <span
-            className={cx([
-              "text-sm font-medium",
-              liked ? "text-coquelicot" : "text-davysGray",
-            ])}
+        <div className="text-zinc-800">{content}</div>
+        <div className="flex items-center gap-x-4">
+          <div
+            className="flex items-center gap-x-1 cursor-pointer"
+            onClick={handleLike}
           >
-            {likes}
-          </span>
+            {liked ? (
+              <HeartIconSolid className="h-4 w-4 text-coquelicot" />
+            ) : (
+              <HeartIconOutline className="h-4 w-4 text-davysGray" />
+            )}
+            <span
+              className={cx([
+                "text-sm font-medium",
+                liked ? "text-coquelicot" : "text-davysGray",
+              ])}
+            >
+              {likes}
+            </span>
+          </div>
+          <div className="flex items-center gap-x-1">
+            <ChatBubbleLeftRightIcon className="text-davysGray h-4 w-4" />
+            <span className="text-davysGray text-sm font-medium">
+              {/*{reactions.comments}*/}0
+            </span>
+          </div>
+          <ShareIcon
+            className="text-davysGray h-4 w-4 cursor-pointer"
+            onClick={handleShare}
+          />
         </div>
-        <div className="flex items-center gap-x-1">
-          <ChatBubbleLeftRightIcon className="text-davysGray h-4 w-4" />
-          <span className="text-davysGray text-sm font-medium">
-            {/*{reactions.comments}*/}0
-          </span>
-        </div>
-        <ShareIcon
-          className="text-davysGray h-4 w-4 cursor-pointer"
-          onClick={handleShare}
-        />
       </div>
     </div>
   );
