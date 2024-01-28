@@ -11,7 +11,7 @@ import { useLikePost } from "@/app/api/hooks";
 import { cx } from "class-variance-authority";
 import toast from "react-hot-toast";
 
-export default function Card({
+export default function PostCard({
   content,
   reactions,
   createdAt,

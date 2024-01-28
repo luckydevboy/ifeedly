@@ -14,6 +14,7 @@ const config: Config = {
       ghostWhite: "#F1F4FD",
       seaSalt: "#F7F7F7",
       white: "#ffffff",
+      black: "#000000",
       antiFlashWhite: "#F0F0F0",
       coquelicot: "#ff5d2b",
     },
