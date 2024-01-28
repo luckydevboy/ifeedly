@@ -1,7 +1,7 @@
 "use client";
 
 import { Editor, EditorState, convertToRaw } from "draft-js";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
 import "draft-js/dist/Draft.css";
 import { cx } from "class-variance-authority";
@@ -16,6 +16,7 @@ export default function Composer({ onSubmit, isLoading }: Props) {
     EditorState.createEmpty(),
   );
   const [isClient, setIsClient] = useState(false);
+  const editorRef = useRef<any>(null);
 
   const text = convertToRaw(editorState.getCurrentContent()).blocks[0].text;
 
@@ -28,13 +29,22 @@ export default function Composer({ onSubmit, isLoading }: Props) {
     setEditorState(EditorState.createEmpty());
   };
 
+  const handleFocus = () => {
+    editorRef.current && editorRef.current.focus();
+  };
+
   return (
-    <div className="bg-seaSalt rounded-lg px-6 py-4 flex flex-col">
+    <div
+      className="bg-seaSalt rounded-lg px-6 py-4 flex flex-col cursor-text"
+      onClick={handleFocus}
+      onFocus={handleFocus}
+    >
       {isClient && (
         <Editor
           editorState={editorState}
           onChange={setEditorState}
           placeholder="Share your knowledge..."
+          ref={editorRef}
         />
       )}
       <button
