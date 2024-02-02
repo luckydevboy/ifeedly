@@ -9,7 +9,7 @@ export function useGetPosts() {
     queryFn: ({ pageParam }) => getPosts({ page: Number(pageParam), pageSize }),
     getNextPageParam: (lastPage, allPages) => {
       const currentTotal = allPages.reduce(
-        (acc, curr) => curr.data.data.items.length + acc,
+        (acc, curr) => curr.data.data.posts.length + acc,
         0,
       );
       const totalCount = lastPage.data.data.total;

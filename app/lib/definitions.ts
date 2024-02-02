@@ -7,19 +7,15 @@ export type Post = {
     likes: number;
     isLiked?: boolean;
   };
-  author: {
-    username: string;
-    name: string;
-    image: string;
-  };
+  author: Pick<User, "username" | "name" | "image">;
 };
 
-export type Response<T> = {
-  status: string;
-  data: {
-    items: T;
-    currentPage: number;
-    pageSize: number;
-    total: number;
-  };
+export type User = {
+  _id: string;
+  createdAt: string;
+  updatedAt: string;
+  username: string;
+  name: string;
+  image: string;
+  role: string;
 };

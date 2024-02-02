@@ -14,7 +14,7 @@ export default function Home() {
   const createPost = useCreatePost();
 
   const posts = data?.pages.reduce(
-    (acc: Post[], page) => acc.concat(page.data.data.items),
+    (acc: Post[], page) => acc.concat(page.data.data.posts),
     [],
   );
 

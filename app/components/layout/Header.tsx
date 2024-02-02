@@ -14,12 +14,16 @@ import { useClickAway } from "react-use";
 import { cx } from "class-variance-authority";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useGetProfile } from "@/app/api/hooks/users";
+import { useSession } from "next-auth/react";
 
 export default function Header() {
   const [createModalIsOpen, setCreateModalIsOpen] = useState(false);
   const [mobileMenuIsOpen, setMobileMenu] = useState(false);
   const mobileMenuRef = useRef(null);
   const pathname = usePathname();
+  const { data: session } = useSession();
+  const { data: profile, isLoading } = useGetProfile(Boolean(session));
 
   useClickAway(mobileMenuRef, () => {
     setMobileMenu(false);
@@ -44,24 +48,32 @@ export default function Header() {
         {/*  </div>*/}
         {/*</div>*/}
       </div>
-      <div className="items-center gap-x-6 hidden lg:flex">
-        <button
-          className="flex items-center gap-x-2 bg-cornflowerBlue text-white px-4 py-2 rounded-lg"
-          onClick={() => setCreateModalIsOpen(true)}
+      {session ? (
+        <div className="items-center gap-x-6 hidden lg:flex">
+          <button
+            className="flex items-center gap-x-2 bg-cornflowerBlue text-white px-4 py-2 rounded-lg"
+            onClick={() => setCreateModalIsOpen(true)}
+          >
+            <PlusIcon className="text-white w-5 h-5" /> Create
+          </button>
+          {/*<InboxIcon className="w-6 h-6 text-davysGray" />*/}
+          {/*<div className="border-r border-antiFlashWhite h-6 w-1" />*/}
+          {/*<BellIcon className="w-6 h-6 text-davysGray" />*/}
+          <img
+            src={profile?.image}
+            className="h-10 w-10 overflow-hidden rounded-full"
+            alt="Profile"
+          />
+        </div>
+      ) : (
+        <Link
+          className="bg-cornflowerBlue text-white px-4 py-2 rounded-lg hover:bg-cornflowerBlue/90"
+          href={`/api/auth/signin?callbackUrl=${pathname}`}
         >
-          <PlusIcon className="text-white w-5 h-5" /> Create
-        </button>
-        {/*<InboxIcon className="w-6 h-6 text-davysGray" />*/}
-        {/*<div className="border-r border-antiFlashWhite h-6 w-1" />*/}
-        {/*<BellIcon className="w-6 h-6 text-davysGray" />*/}
-        <Image
-          src="/assets/img/mohammadreza.png"
-          width={40}
-          height={40}
-          className="rounded-full overflow-hidden border border-dashed border-cornflowerBlue"
-          alt="Profile"
-        />
-      </div>
+          Login
+        </Link>
+      )}
+
       <Bars3Icon
         className="w-6 h-6 lg:hidden text-davysGray"
         onClick={() => setMobileMenu(true)}
