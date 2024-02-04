@@ -49,41 +49,42 @@ export default function Header() {
         {/*</div>*/}
       </div>
       {session ? (
-        <div className="items-center gap-x-6 hidden lg:flex">
-          <button
-            className="flex items-center gap-x-2 bg-cornflowerBlue text-white px-4 py-2 rounded-lg"
-            onClick={() => setCreateModalIsOpen(true)}
-          >
-            <PlusIcon className="text-white w-5 h-5" /> Create
-          </button>
-          {/*<InboxIcon className="w-6 h-6 text-davysGray" />*/}
-          {/*<div className="border-r border-antiFlashWhite h-6 w-1" />*/}
-          {/*<BellIcon className="w-6 h-6 text-davysGray" />*/}
-          <img
-            src={profile?.image}
-            className="h-10 w-10 overflow-hidden rounded-full"
-            alt="Profile"
+        <>
+          <Bars3Icon
+            className="w-6 h-6 lg:hidden text-davysGray"
+            onClick={() => setMobileMenu(true)}
           />
-        </div>
+          <div className="flex items-center gap-x-6">
+            <button
+              className="hidden lg:flex items-center gap-x-2 bg-cornflowerBlue text-white px-4 py-2 rounded-lg"
+              onClick={() => setCreateModalIsOpen(true)}
+            >
+              <PlusIcon className="text-white w-5 h-5" /> Create
+            </button>
+            {/*<InboxIcon className="w-6 h-6 text-davysGray" />*/}
+            {/*<div className="border-r border-antiFlashWhite h-6 w-1" />*/}
+            {/*<BellIcon className="w-6 h-6 text-davysGray" />*/}
+            <img
+              src={profile?.image}
+              className="h-10 w-10 overflow-hidden rounded-full"
+              alt="Profile"
+            />
+          </div>
+        </>
       ) : (
-        <Link
-          className="bg-cornflowerBlue text-white px-4 py-2 rounded-lg hover:bg-cornflowerBlue/90"
-          href={`/api/auth/signin?callbackUrl=${pathname}`}
-        >
-          Login
-        </Link>
+        <>
+          <Bars3Icon
+            className="w-6 h-6 lg:hidden text-davysGray"
+            onClick={() => setMobileMenu(true)}
+          />
+          <Link
+            className="bg-cornflowerBlue text-white px-4 py-2 rounded-lg hover:bg-cornflowerBlue/90"
+            href={`/api/auth/signin?callbackUrl=${pathname}`}
+          >
+            Login
+          </Link>
+        </>
       )}
-
-      <Bars3Icon
-        className="w-6 h-6 lg:hidden text-davysGray"
-        onClick={() => setMobileMenu(true)}
-      />
-      <button
-        className="flex items-center gap-x-2 bg-cornflowerBlue text-white text-sm px-4 py-1.5 rounded-lg lg:hidden"
-        onClick={() => setCreateModalIsOpen(true)}
-      >
-        Create
-      </button>
       <AnimatePresence>
         {mobileMenuIsOpen && (
           <>
@@ -97,32 +98,42 @@ export default function Header() {
               initial={{ left: "-75%" }}
               animate={{ left: 0 }}
               exit={{ left: "-75%" }}
-              className="absolute z-20 p-4 top-0 w-3/4 h-screen rounded-l-lg bg-white lg:hidden space-y-4"
+              className="absolute z-20 p-4 top-0 w-3/4 h-screen rounded-l-lg bg-white lg:hidden"
               ref={mobileMenuRef}
             >
-              <div className="flex items-center gap-x-4 mb-12">
-                <Image
-                  src="/assets/img/logo.png"
-                  alt="Logo"
-                  width={35}
-                  height={35}
-                />
-                <div className="font-black text-2xl text-cornflowerBlue">
-                  IFeedly
+              <div className="h-full space-y-4 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-x-4 mb-12">
+                    <Image
+                      src="/assets/img/logo.png"
+                      alt="Logo"
+                      width={35}
+                      height={35}
+                    />
+                    <div className="font-black text-2xl text-cornflowerBlue">
+                      IFeedly
+                    </div>
+                  </div>
+                  <Link
+                    href="/"
+                    className={cx([
+                      "flex items-center gap-x-3 px-4 py-2",
+                      pathname === "/"
+                        ? "bg-ghostWhite text-cornflowerBlue rounded-lg"
+                        : "text-davysGray",
+                    ])}
+                  >
+                    <HomeIcon className="w-6 h-6" />
+                    <span className="font-semibold">Home</span>
+                  </Link>
                 </div>
+                <button
+                  className="flex items-center justify-center gap-x-2 bg-cornflowerBlue text-white px-4 py-2 rounded-lg w-full"
+                  onClick={() => setCreateModalIsOpen(true)}
+                >
+                  <PlusIcon className="text-white w-5 h-5" /> Create
+                </button>
               </div>
-              <Link
-                href="/"
-                className={cx([
-                  "flex items-center gap-x-3  px-4 py-2",
-                  pathname === "/"
-                    ? "bg-ghostWhite text-cornflowerBlue rounded-lg"
-                    : "text-davysGray",
-                ])}
-              >
-                <HomeIcon className="w-6 h-6" />
-                <span className="font-semibold">Home</span>
-              </Link>
             </motion.div>
           </>
         )}
