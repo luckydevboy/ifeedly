@@ -1,6 +1,7 @@
-import { useInfiniteQuery, useMutation } from "@tanstack/react-query";
-import { getPosts, createPost, likePost } from "../https";
+import { useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query";
+import { getPosts, createPost, likePost, getPost } from "../https";
 
+// TODO: use arrow function
 export function useGetPosts() {
   const pageSize = 10;
   return useInfiniteQuery({
@@ -23,6 +24,14 @@ export function useGetPosts() {
     },
   });
 }
+
+export const useGetPost = (id: string) => {
+  return useQuery({
+    queryKey: ["posts", id],
+    queryFn: () => getPost(id),
+    select: (res) => res.data.data.post,
+  });
+};
 
 export function useCreatePost() {
   return useMutation({

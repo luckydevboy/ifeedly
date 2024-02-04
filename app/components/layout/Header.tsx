@@ -32,10 +32,10 @@ export default function Header() {
   return (
     <header className="border-b border-seaSalt flex items-center justify-between px-8 py-4 gap-x-4 sticky top-0 z-10 bg-white">
       <div className="items-center gap-x-8 hidden lg:flex flex-grow">
-        <div className="flex items-center gap-x-4">
+        <Link href="/" className="flex items-center gap-x-4">
           <Image src="/assets/img/logo.png" alt="Logo" width={35} height={35} />
           <div className="font-black text-2xl text-cornflowerBlue">IFeedly</div>
-        </div>
+        </Link>
         {/*<div className="bg-seaSalt rounded-lg px-4 py-2 flex items-center gap-x-2 flex-grow max-w-[400px]">*/}
         {/*  <MagnifyingGlassIcon className="h-6 w-6 text-davysGray" />*/}
         {/*  <input*/}

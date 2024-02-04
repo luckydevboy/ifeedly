@@ -14,6 +14,12 @@ export async function getPosts({
   return await axios.get("/posts", { params: { page, pageSize } });
 }
 
+export const getPost = async (
+  id: string,
+): Promise<AxiosResponse<{ status: string; data: { post: Post } }>> => {
+  return await axios.get(`posts/${id}`);
+};
+
 export async function createPost(content: string) {
   return await axios.post("/posts", { content });
 }

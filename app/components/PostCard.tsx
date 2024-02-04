@@ -10,6 +10,8 @@ import { useState } from "react";
 import { useLikePost } from "@/app/api/hooks";
 import { cx } from "class-variance-authority";
 import toast from "react-hot-toast";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 export default function PostCard({
   content,
@@ -21,6 +23,8 @@ export default function PostCard({
   const [likes, setLikes] = useState(reactions.likes);
   const [liked, setLiked] = useState(reactions.isLiked);
   const likePost = useLikePost();
+  const pathname = usePathname();
+  const inPostsPage = pathname.includes("posts");
 
   const handleLike = () => {
     if (liked) {
@@ -69,7 +73,13 @@ export default function PostCard({
             {formatDistanceToNow(createdAt)}
           </div>
         </div>
-        <div className="text-zinc-800">{content}</div>
+        {inPostsPage ? (
+          <div className="text-zinc-800">{content}</div>
+        ) : (
+          <Link href={`posts/${_id}`} className="text-zinc-800">
+            {content}
+          </Link>
+        )}
         <div className="flex items-center gap-x-4">
           <div
             className="flex items-center gap-x-1 cursor-pointer"
