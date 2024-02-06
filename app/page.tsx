@@ -1,6 +1,6 @@
 "use client";
 
-import { PostCard, Composer } from "@/app/components";
+import { Card, Composer } from "@/app/components";
 import React from "react";
 import { useGetPosts, useCreatePost } from "@/app/api/hooks";
 import toast from "react-hot-toast";
@@ -48,13 +48,12 @@ export default function Home() {
             </div>
           )
         }
-        className="space-y-4"
       >
         {posts?.map((post, index) => (
-          <React.Fragment key={post._id}>
+          <div className="mt-4 space-y-4" key={post._id}>
             {index !== 0 && <hr className="border-seaSalt" />}
-            <PostCard {...post} />
-          </React.Fragment>
+            <Card {...post} type="post" />
+          </div>
         ))}
       </InfiniteScroll>
     </main>

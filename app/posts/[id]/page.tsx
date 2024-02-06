@@ -1,7 +1,7 @@
 "use client";
 
 import { useCreateComment, useGetPost } from "@/app/api/hooks";
-import { CommentCard, Composer, PostCard } from "@/app/components";
+import { Composer, Card } from "@/app/components";
 import React from "react";
 import toast from "react-hot-toast";
 import { BeatLoader } from "react-spinners";
@@ -30,8 +30,8 @@ const Post = ({ params }: { params: { id: string } }) => {
         </div>
       )}
       {post && (
-        <>
-          <PostCard {...post} />
+        <div className="mt-4">
+          <Card {...post} type="post" />
           <hr className="border-seaSalt my-4" />
           {post.reactions.comments.length !== 0 && (
             <>
@@ -41,12 +41,16 @@ const Post = ({ params }: { params: { id: string } }) => {
               {post.reactions.comments.map((comment, index) => (
                 <React.Fragment key={comment._id}>
                   {index !== 0 && <hr className="border-seaSalt my-4" />}
-                  <CommentCard {...comment} />
+                  <Card
+                    {...comment}
+                    reactions={{ comments: [], likes: 0 }}
+                    type="comment"
+                  />
                 </React.Fragment>
               ))}
             </>
           )}
-        </>
+        </div>
       )}
       <h2 className="text-xl font-bold mt-16 mb-4">Add Comment</h2>
       <Composer

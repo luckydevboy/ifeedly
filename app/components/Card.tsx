@@ -13,13 +13,18 @@ import toast from "react-hot-toast";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
-export default function PostCard({
+interface Props extends Post {
+  type: "post" | "comment";
+}
+
+export default function Card({
   content,
   reactions,
   createdAt,
   author,
   _id,
-}: Post) {
+  type,
+}: Props) {
   const [likes, setLikes] = useState(reactions.likes);
   const [liked, setLiked] = useState(reactions.isLiked);
   const likePost = useLikePost();
@@ -27,16 +32,18 @@ export default function PostCard({
   const inPostsPage = pathname.includes("posts");
 
   const handleLike = () => {
-    if (liked) {
-      likePost.mutateAsync(_id).then(() => {
-        setLikes(likes - 1);
-        setLiked(false);
-      });
-    } else {
-      likePost.mutateAsync(_id).then(() => {
-        setLikes(likes + 1);
-        setLiked(true);
-      });
+    if (type === "post") {
+      if (liked) {
+        likePost.mutateAsync(_id).then(() => {
+          setLikes(likes - 1);
+          setLiked(false);
+        });
+      } else {
+        likePost.mutateAsync(_id).then(() => {
+          setLikes(likes + 1);
+          setLiked(true);
+        });
+      }
     }
   };
 
@@ -61,22 +68,20 @@ export default function PostCard({
         className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0"
       />
       <div className="space-y-4">
-        <div className="flex items-center gap-x-2">
-          <div className="font-bold text-sm overflow-hidden text-ellipsis whitespace-nowrap">
-            {author.name}
-          </div>
-          <div className="text-xs text-davysGray overflow-hidden text-ellipsis whitespace-nowrap">
-            {author.username}
-          </div>
-          <div className="text-xs text-davysGray">&#9679;</div>
-          <div className="text-xs text-davysGray overflow-hidden text-ellipsis whitespace-nowrap">
+        <div className="flex flex-col lg:flex-row lg:items-center gap-x-2">
+          <div className="font-bold text-sm">{author.name}</div>
+          <div className="text-xs text-davysGray">{author.username}</div>
+          <div className="text-xs text-davysGray">
             {formatDistanceToNow(createdAt)}
           </div>
         </div>
         {inPostsPage ? (
-          <div className="text-zinc-800">{content}</div>
+          <div className="text-zinc-800 mt-4 lg:mt-0">{content}</div>
         ) : (
-          <Link href={`posts/${_id}`} className="text-zinc-800">
+          <Link
+            href={`posts/${_id}`}
+            className="text-zinc-800 mt-4 lg:mt-0 block"
+          >
             {content}
           </Link>
         )}
