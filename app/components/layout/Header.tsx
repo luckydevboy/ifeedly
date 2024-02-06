@@ -79,7 +79,7 @@ export default function Header() {
           />
           <Link
             className="bg-cornflowerBlue text-white px-4 py-2 rounded-lg hover:bg-cornflowerBlue/90"
-            href={`/api/auth/signin?callbackUrl=${pathname}`}
+            href={`/signin?callbackUrl=${pathname}`}
           >
             Login
           </Link>

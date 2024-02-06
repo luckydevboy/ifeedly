@@ -6,7 +6,6 @@ import {
   ReactQueryProvider,
 } from "@/app/lib/providers";
 import { Toaster } from "react-hot-toast";
-import Layout from "@/app/components/layout";
 
 const nunito = Nunito({ subsets: ["latin"] });
 
@@ -24,9 +23,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={nunito.className}>
         <NextAuthSessionProvider>
-          <ReactQueryProvider>
-            <Layout>{children}</Layout>
-          </ReactQueryProvider>
+          <ReactQueryProvider>{children}</ReactQueryProvider>
         </NextAuthSessionProvider>
         <Toaster />
       </body>
