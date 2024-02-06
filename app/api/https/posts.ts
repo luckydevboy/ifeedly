@@ -27,3 +27,7 @@ export async function createPost(content: string) {
 export const likePost = async (id: string) => {
   return await axios.put(`/posts/like/${id}`);
 };
+
+export const createComment = async (postId: string, content: string) => {
+  return await axios.post(`/posts/${postId}/comments`, { content });
+};

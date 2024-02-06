@@ -10,12 +10,14 @@ type Props = {
   onSubmit: (data: string) => void;
   isLoading: boolean;
   buttonPosition?: "inside" | "outside";
+  placeholder: string;
 };
 
 export default function Composer({
   onSubmit,
   isLoading,
   buttonPosition = "inside",
+  placeholder,
 }: Props) {
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty(),
@@ -49,7 +51,7 @@ export default function Composer({
           <Editor
             editorState={editorState}
             onChange={setEditorState}
-            placeholder="Share your knowledge..."
+            placeholder={placeholder}
             ref={editorRef}
           />
         )}

@@ -53,6 +53,7 @@ const CreatePostModal = ({ isOpen, onClose }: Props) => {
                     onSubmit={addNewPost}
                     isLoading={createPost.isPending}
                     buttonPosition="outside"
+                    placeholder="Share your knowledge..."
                   />
                 </div>
               </Dialog.Panel>

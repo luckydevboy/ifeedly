@@ -27,7 +27,11 @@ export default function Home() {
 
   return (
     <main className="space-y-4">
-      <Composer onSubmit={addNewPost} isLoading={createPost.isPending} />
+      <Composer
+        onSubmit={addNewPost}
+        isLoading={createPost.isPending}
+        placeholder="Share your knowledge..."
+      />
       {isFetching && (
         <div className="text-center">
           <BeatLoader size={10} color="#7090E8" className="my-4" />

@@ -1,12 +1,27 @@
 "use client";
 
-import { useGetPost } from "@/app/api/hooks";
-import { CommentCard, PostCard } from "@/app/components";
+import { useCreateComment, useGetPost } from "@/app/api/hooks";
+import { CommentCard, Composer, PostCard } from "@/app/components";
 import React from "react";
+import toast from "react-hot-toast";
 import { BeatLoader } from "react-spinners";
 
 const Post = ({ params }: { params: { id: string } }) => {
-  const { data: post, isLoading } = useGetPost(params.id);
+  const { data: post, isLoading, refetch } = useGetPost(params.id);
+  const createComment = useCreateComment();
+
+  const handlePostComment = (content: string) => {
+    createComment
+      .mutateAsync({ content, postId: params.id })
+      .then(() => {
+        toast.success("Your comment successfully submitted.");
+        refetch();
+      })
+      .catch((err) => {
+        toast.error(err);
+      });
+  };
+
   return (
     <>
       {isLoading && (
@@ -33,6 +48,12 @@ const Post = ({ params }: { params: { id: string } }) => {
           )}
         </>
       )}
+      <h2 className="text-xl font-bold mt-16 mb-4">Add Comment</h2>
+      <Composer
+        onSubmit={handlePostComment}
+        isLoading={false}
+        placeholder="Type your comment here"
+      />
     </>
   );
 };
