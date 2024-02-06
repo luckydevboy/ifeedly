@@ -1,7 +1,7 @@
 "use client";
 
 import { useGetPost } from "@/app/api/hooks";
-import { PostCard } from "@/app/components";
+import { CommentCard, PostCard } from "@/app/components";
 import React from "react";
 import { BeatLoader } from "react-spinners";
 
@@ -18,6 +18,15 @@ const Post = ({ params }: { params: { id: string } }) => {
         <>
           <PostCard {...post} />
           <hr className="border-seaSalt my-4" />
+          <h2 className="text-xl font-bold mb-8">
+            {post.comments.length} Comments
+          </h2>
+          {post.comments.map((comment, index) => (
+            <React.Fragment key={comment._id}>
+              {index !== 0 && <hr className="border-seaSalt my-4" />}
+              <CommentCard {...comment} />
+            </React.Fragment>
+          ))}
         </>
       )}
     </>

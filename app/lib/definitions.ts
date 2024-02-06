@@ -8,6 +8,15 @@ export type Post = {
     isLiked?: boolean;
   };
   author: Pick<User, "username" | "name" | "image">;
+  comments: Comment[];
+};
+
+export type Comment = {
+  _id: string;
+  createdAt: string;
+  updatedAt: string;
+  content: string;
+  author: Pick<User, "username" | "name" | "image">;
 };
 
 export type User = {
