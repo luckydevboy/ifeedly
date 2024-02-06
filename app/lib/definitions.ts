@@ -5,10 +5,10 @@ export type Post = {
   content: string;
   reactions: {
     likes: number;
+    comments: Comment[];
     isLiked?: boolean;
   };
   author: Pick<User, "username" | "name" | "image">;
-  comments: Comment[];
 };
 
 export type Comment = {

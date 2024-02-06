@@ -102,7 +102,7 @@ export default function PostCard({
           <div className="flex items-center gap-x-1">
             <ChatBubbleLeftRightIcon className="text-davysGray h-4 w-4" />
             <span className="text-davysGray text-sm font-medium">
-              {/*{reactions.comments}*/}0
+              {reactions.comments.length}
             </span>
           </div>
           <ShareIcon

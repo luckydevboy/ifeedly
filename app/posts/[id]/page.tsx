@@ -18,15 +18,19 @@ const Post = ({ params }: { params: { id: string } }) => {
         <>
           <PostCard {...post} />
           <hr className="border-seaSalt my-4" />
-          <h2 className="text-xl font-bold mb-8">
-            {post.comments.length} Comments
-          </h2>
-          {post.comments.map((comment, index) => (
-            <React.Fragment key={comment._id}>
-              {index !== 0 && <hr className="border-seaSalt my-4" />}
-              <CommentCard {...comment} />
-            </React.Fragment>
-          ))}
+          {post.reactions.comments.length !== 0 && (
+            <>
+              <h2 className="text-xl font-bold mb-8">
+                {post.reactions.comments.length} Comments
+              </h2>
+              {post.reactions.comments.map((comment, index) => (
+                <React.Fragment key={comment._id}>
+                  {index !== 0 && <hr className="border-seaSalt my-4" />}
+                  <CommentCard {...comment} />
+                </React.Fragment>
+              ))}
+            </>
+          )}
         </>
       )}
     </>
