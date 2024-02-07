@@ -1,4 +1,4 @@
-import { PostWithComments } from "@/app/lib/definitions";
+import { PostWithCommentsCount } from "@/app/lib/definitions";
 import { formatDistanceToNow } from "date-fns";
 import {
   ChatBubbleLeftRightIcon,
@@ -13,7 +13,7 @@ import toast from "react-hot-toast";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
-interface Props extends PostWithComments {
+interface Props extends PostWithCommentsCount {
   type: "post" | "comment";
 }
 
@@ -107,7 +107,7 @@ export default function Card({
           <div className="flex items-center gap-x-1">
             <ChatBubbleLeftRightIcon className="text-davysGray h-4 w-4" />
             <span className="text-davysGray text-sm font-medium">
-              {reactions.comments.length}
+              {reactions.comments}
             </span>
           </div>
           <ShareIcon

@@ -31,7 +31,14 @@ const Post = ({ params }: { params: { id: string } }) => {
       )}
       {post && (
         <div className="mt-4">
-          <Card {...post} type="post" />
+          <Card
+            {...post}
+            reactions={{
+              ...post.reactions,
+              comments: post.reactions.comments.length,
+            }}
+            type="post"
+          />
           <hr className="border-seaSalt my-4" />
           {post.reactions.comments.length !== 0 && (
             <>
@@ -43,7 +50,7 @@ const Post = ({ params }: { params: { id: string } }) => {
                   {index !== 0 && <hr className="border-seaSalt my-4" />}
                   <Card
                     {...comment}
-                    reactions={{ comments: [], likes: 0 }}
+                    reactions={{ comments: 0, likes: 0 }}
                     type="comment"
                   />
                 </React.Fragment>

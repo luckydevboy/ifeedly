@@ -4,7 +4,7 @@ import { Card, Composer } from "@/app/components";
 import React from "react";
 import { useGetPosts, useCreatePost } from "@/app/api/hooks";
 import toast from "react-hot-toast";
-import { Post } from "@/app/lib/definitions";
+import { PostWithCommentsCount } from "@/app/lib/definitions";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { BeatLoader } from "react-spinners";
 
@@ -14,7 +14,7 @@ export default function Home() {
   const createPost = useCreatePost();
 
   const posts = data?.pages.reduce(
-    (acc: Post[], page) => acc.concat(page.data.data.posts),
+    (acc: PostWithCommentsCount[], page) => acc.concat(page.data.data.posts),
     [],
   );
 
