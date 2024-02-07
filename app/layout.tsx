@@ -6,7 +6,7 @@ import {
   ReactQueryProvider,
 } from "@/app/lib/providers";
 import { Toaster } from "react-hot-toast";
-import { Suspense } from "react";
+import React, { Suspense } from "react";
 
 const nunito = Nunito({ subsets: ["latin"] });
 

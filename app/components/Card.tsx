@@ -1,4 +1,4 @@
-import { Post } from "@/app/lib/definitions";
+import { PostWithComments } from "@/app/lib/definitions";
 import { formatDistanceToNow } from "date-fns";
 import {
   ChatBubbleLeftRightIcon,
@@ -13,7 +13,7 @@ import toast from "react-hot-toast";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
-interface Props extends Post {
+interface Props extends PostWithComments {
   type: "post" | "comment";
 }
 

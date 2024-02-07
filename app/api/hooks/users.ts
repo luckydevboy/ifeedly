@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getProfile } from "@/app/api/https/users";
+import { getProfile } from "@/app/api/https";
 
 export const useGetProfile = (enabled: boolean) => {
   return useQuery({

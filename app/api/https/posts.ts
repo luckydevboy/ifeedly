@@ -1,5 +1,5 @@
 import { axios } from "../axiosInstance";
-import { Post } from "@/app/lib/definitions";
+import { PostWithComments, PostWithCommentsCount } from "@/app/lib/definitions";
 import { AxiosResponse } from "axios";
 
 export async function getPosts({
@@ -9,14 +9,19 @@ export async function getPosts({
   page: number;
   pageSize: number;
 }): Promise<
-  AxiosResponse<{ status: string; data: { total: number; posts: Post[] } }>
+  AxiosResponse<{
+    status: string;
+    data: { total: number; posts: PostWithCommentsCount[] };
+  }>
 > {
   return await axios.get("/posts", { params: { page, pageSize } });
 }
 
 export const getPost = async (
   id: string,
-): Promise<AxiosResponse<{ status: string; data: { post: Post } }>> => {
+): Promise<
+  AxiosResponse<{ status: string; data: { post: PostWithComments } }>
+> => {
   return await axios.get(`posts/${id}`);
 };
 

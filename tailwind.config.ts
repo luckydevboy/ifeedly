@@ -7,16 +7,16 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    colors: {
-      cornflowerBlue: "#7090E8",
-      davysGray: "#4E5358",
-      vistaBlue: "#93ABED",
-      ghostWhite: "#F1F4FD",
-      seaSalt: "#F7F7F7",
-      white: "#ffffff",
-      black: "#000000",
-      antiFlashWhite: "#F0F0F0",
-      coquelicot: "#ff5d2b",
+    extend: {
+      colors: {
+        cornflowerBlue: "#7090E8",
+        davysGray: "#4E5358",
+        vistaBlue: "#93ABED",
+        ghostWhite: "#F1F4FD",
+        seaSalt: "#F7F7F7",
+        antiFlashWhite: "#F0F0F0",
+        coquelicot: "#ff5d2b",
+      },
     },
   },
   plugins: [],

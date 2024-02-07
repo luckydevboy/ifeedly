@@ -43,7 +43,7 @@ const options: AuthOptions = {
     },
   },
   pages: {
-    signIn: "../../../signin",
+    signIn: "../../../sign-in",
   },
 };
 
