@@ -7,6 +7,7 @@ import {
 } from "@/app/lib/providers";
 import { Toaster } from "react-hot-toast";
 import React, { Suspense } from "react";
+import { Analytics } from "@vercel/analytics/react";
 
 const nunito = Nunito({ subsets: ["latin"] });
 
@@ -29,6 +30,7 @@ export default function RootLayout({
           </ReactQueryProvider>
         </NextAuthSessionProvider>
         <Toaster />
+        <Analytics />
       </body>
     </html>
   );
