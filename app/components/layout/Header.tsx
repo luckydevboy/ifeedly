@@ -157,7 +157,7 @@ export default function Header() {
               initial={{ left: "-75%" }}
               animate={{ left: 0 }}
               exit={{ left: "-75%" }}
-              className="absolute z-20 p-4 top-0 w-3/4 h-screen rounded-l-lg bg-white lg:hidden"
+              className="absolute z-20 p-4 top-0 w-3/4 h-svh rounded-l-lg bg-white lg:hidden"
               ref={mobileMenuRef}
             >
               <div className="h-full space-y-4 flex flex-col justify-between">
