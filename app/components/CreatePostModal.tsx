@@ -3,16 +3,23 @@ import React, { Fragment } from "react";
 import { Composer } from "@/app/components/index";
 import toast from "react-hot-toast";
 import { useCreatePost } from "@/app/api/hooks";
+import { useQueryClient } from "@tanstack/react-query";
 
 type Props = { isOpen: boolean; onClose: () => void };
 
 const CreatePostModal = ({ isOpen, onClose }: Props) => {
   const createPost = useCreatePost();
-  const addNewPost = (content: string) => {
-    createPost.mutateAsync(content).then(() => {
+  const queryClient = useQueryClient();
+  const addNewPost = async (content: string) => {
+    try {
+      await createPost.mutateAsync(content);
       toast.success("Your post successfully sent.");
+      await queryClient.invalidateQueries({ queryKey: ["posts"] });
       onClose();
-    });
+    } catch (error: any) {
+      console.log(error);
+      toast.error(error.message);
+    }
   };
 
   return (

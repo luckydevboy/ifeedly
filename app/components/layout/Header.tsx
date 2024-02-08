@@ -64,7 +64,7 @@ export default function Header() {
         <>
           <div className="flex items-center gap-x-6">
             <button
-              className="hidden lg:flex items-center gap-x-2 bg-cornflowerBlue text-white px-4 py-2 rounded-lg"
+              className="flex items-center gap-x-2 bg-cornflowerBlue text-white px-4 py-2 rounded-lg"
               onClick={() => setCreateModalIsOpen(true)}
             >
               <PlusIcon className="text-white w-5 h-5" /> Create
@@ -182,12 +182,6 @@ export default function Header() {
                     <span className="font-semibold">Home</span>
                   </Link>
                 </div>
-                <button
-                  className="flex items-center justify-center gap-x-2 bg-cornflowerBlue text-white px-4 py-2 rounded-lg w-full"
-                  onClick={() => setCreateModalIsOpen(true)}
-                >
-                  <PlusIcon className="text-white w-5 h-5" /> Create
-                </button>
               </div>
             </motion.div>
           </>
