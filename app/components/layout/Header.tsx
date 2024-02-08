@@ -28,7 +28,7 @@ export default function Header() {
   const [mobileMenuIsOpen, setMobileMenu] = useState(false);
   const mobileMenuRef = useRef(null);
   const pathname = usePathname();
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const { data: profile, isLoading } = useGetProfile(Boolean(session));
 
   useClickAway(mobileMenuRef, () => {
@@ -54,12 +54,14 @@ export default function Header() {
         {/*  </div>*/}
         {/*</div>*/}
       </div>
-      {session ? (
+      <Bars3Icon
+        className="w-6 h-6 lg:hidden text-davysGray"
+        onClick={() => setMobileMenu(true)}
+      />
+      {status === "loading" ? (
+        <></>
+      ) : session ? (
         <>
-          <Bars3Icon
-            className="w-6 h-6 lg:hidden text-davysGray"
-            onClick={() => setMobileMenu(true)}
-          />
           <div className="flex items-center gap-x-6">
             <button
               className="hidden lg:flex items-center gap-x-2 bg-cornflowerBlue text-white px-4 py-2 rounded-lg"
@@ -69,7 +71,7 @@ export default function Header() {
             </button>
             {/* TODO: make it a ui component */}
             <Menu as="div" className="relative inline-block text-left">
-              <Menu.Button>
+              <Menu.Button className="block">
                 {profile?.image ? (
                   <img
                     src={profile.image}
@@ -131,18 +133,12 @@ export default function Header() {
           </div>
         </>
       ) : (
-        <>
-          <Bars3Icon
-            className="w-6 h-6 lg:hidden text-davysGray"
-            onClick={() => setMobileMenu(true)}
-          />
-          <Link
-            className="bg-cornflowerBlue text-white px-4 py-2 rounded-lg hover:bg-cornflowerBlue/90"
-            href={`/sign-in?callbackUrl=${pathname}`}
-          >
-            Login
-          </Link>
-        </>
+        <Link
+          className="bg-cornflowerBlue text-white px-4 py-2 rounded-lg hover:bg-cornflowerBlue/90"
+          href={`/sign-in?callbackUrl=${pathname}`}
+        >
+          Login
+        </Link>
       )}
       <AnimatePresence>
         {mobileMenuIsOpen && (
