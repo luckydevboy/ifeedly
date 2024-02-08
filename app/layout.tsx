@@ -8,6 +8,7 @@ import {
 import { Toaster } from "react-hot-toast";
 import React, { Suspense } from "react";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const nunito = Nunito({ subsets: ["latin"] });
 
@@ -31,6 +32,7 @@ export default function RootLayout({
         </NextAuthSessionProvider>
         <Toaster />
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
