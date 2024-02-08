@@ -26,7 +26,7 @@ axiosInstance.interceptors.response.use(
   },
   (error) => {
     if (error.response && error.response.status === 401) {
-      window.location.href = "/api/auth/sign-in?callbackUrl=/";
+      window.location.href = "/sign-in";
     }
     return Promise.reject(error);
   },
