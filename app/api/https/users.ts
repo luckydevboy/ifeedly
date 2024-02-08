@@ -7,3 +7,10 @@ export const getProfile = (): Promise<
 > => {
   return axios.get("/users/profile");
 };
+
+export const updateUser = (
+  id: string,
+  data: { username: string; name: string },
+) => {
+  return axios.put(`/users/${id}`, data);
+};
