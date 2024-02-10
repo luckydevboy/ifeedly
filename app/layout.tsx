@@ -8,8 +8,13 @@ import { Toaster } from "react-hot-toast";
 import React, { Suspense } from "react";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Metadata } from "next";
 
 const nunito = Nunito({ subsets: ["latin"] });
+
+export const metadata: Metadata = {
+  manifest: "/manifest.json",
+};
 
 export default function RootLayout({
   children,
