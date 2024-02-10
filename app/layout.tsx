@@ -28,20 +28,20 @@ export default function RootLayout({
         <meta property="og:type" content="website" />
         <meta
           property="og:url"
-          content="https://ifeedly.vercel.app/assets/images/meta-banner.svg"
+          content="https://ifeedly.vercel.app/assets/img/meta-banner.svg"
         />
         <meta property="og:title" content="IFeedly" />
         <meta property="og:description" content="A place to share your idea." />
         <meta
           property="og:image"
-          content="https://ifeedly.vercel.app/assets/images/meta-banner.svg"
+          content="https://ifeedly.vercel.app/assets/img/meta-banner.svg"
         />
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
         <meta
           property="twitter:url"
-          content="https://ifeedly.vercel.app/assets/images/meta-banner.svg"
+          content="https://ifeedly.vercel.app/assets/img/meta-banner.svg"
         />
         <meta property="twitter:title" content="IFeedly" />
         <meta
@@ -50,7 +50,7 @@ export default function RootLayout({
         />
         <meta
           property="twitter:image"
-          content="https://ifeedly.vercel.app/assets/images/meta-banner.svg"
+          content="https://ifeedly.vercel.app/assets/img/meta-banner.svg"
         />
 
         {/* Meta Tags Generated with https://metatags.io */}
