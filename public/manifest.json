@@ -1,8 +1,8 @@
 {
-  "id": "any_id",
-  "name": "Next.js PWA - Tutorial",
-  "short_name": "Next PWA",
-  "description": "This next.js app is a PWA.",
+  "id": "1992",
+  "name": "IFeedly",
+  "short_name": "IFeedly",
+  "description": "A place to share your idea.",
   "icons": [
     {
       "src": "./apple-touch-icon.png",
