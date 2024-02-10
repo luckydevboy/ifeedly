@@ -4,6 +4,7 @@ import {
   ChatBubbleLeftRightIcon,
   HeartIcon as HeartIconOutline,
   ShareIcon,
+  UserCircleIcon,
 } from "@heroicons/react/24/outline";
 import { HeartIcon as HeartIconSolid } from "@heroicons/react/24/solid";
 import { useState } from "react";
@@ -62,11 +63,15 @@ export default function Card({
 
   return (
     <div className="flex gap-x-2">
-      <img
-        src={author.image}
-        alt="Avatar"
-        className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0"
-      />
+      {author.image ? (
+        <img
+          src={author.image}
+          alt="Avatar"
+          className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0"
+        />
+      ) : (
+        <UserCircleIcon className="w-10 h-10 text-davysGray" />
+      )}
       <div className="space-y-4">
         <div className="flex flex-col lg:flex-row lg:items-center gap-x-2">
           <div className="font-bold text-sm">{author.name}</div>
