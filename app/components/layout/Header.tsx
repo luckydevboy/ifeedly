@@ -79,7 +79,14 @@ export default function Header() {
                     alt="Profile"
                   />
                 ) : (
-                  <UserCircleIcon className="w-10 h-10 text-davysGray" />
+                  <div className="bg-gray-200 w-10 h-10 rounded-full flex items-center justify-center">
+                    <Image
+                      src="/assets/img/user.png"
+                      width={30}
+                      height={30}
+                      alt="Profile"
+                    />
+                  </div>
                 )}
               </Menu.Button>
               <Transition

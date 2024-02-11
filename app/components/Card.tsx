@@ -4,7 +4,6 @@ import {
   ChatBubbleLeftRightIcon,
   HeartIcon as HeartIconOutline,
   ShareIcon,
-  UserCircleIcon,
 } from "@heroicons/react/24/outline";
 import { HeartIcon as HeartIconSolid } from "@heroicons/react/24/solid";
 import { useState } from "react";
@@ -13,6 +12,7 @@ import { cx } from "class-variance-authority";
 import toast from "react-hot-toast";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 
 interface Props extends PostWithCommentsCount {
   type: "post" | "comment";
@@ -70,7 +70,14 @@ export default function Card({
           className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0"
         />
       ) : (
-        <UserCircleIcon className="w-10 h-10 text-davysGray" />
+        <div className="bg-gray-200 w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0">
+          <Image
+            src="/assets/img/user.png"
+            width={30}
+            height={30}
+            alt="Profile"
+          />
+        </div>
       )}
       <div className="space-y-4">
         <div className="flex flex-col lg:flex-row lg:items-center gap-x-2">
