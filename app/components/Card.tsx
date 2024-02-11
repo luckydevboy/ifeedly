@@ -70,7 +70,7 @@ export default function Card({
           className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0"
         />
       ) : (
-        <div className="bg-gray-200 w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0">
+        <div className="bg-zinc-100 w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0">
           <Image
             src="/assets/img/user.png"
             width={30}

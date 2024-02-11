@@ -36,7 +36,7 @@ export default function Header() {
   });
 
   return (
-    <header className="border-b border-seaSalt flex items-center justify-between px-8 py-4 gap-x-4 sticky top-0 z-10 bg-white">
+    <header className="border-b border-seaSalt flex items-center justify-between px-4 lg:px-8 py-4 gap-x-4 sticky top-0 z-10 bg-white">
       <div className="items-center gap-x-8 hidden lg:flex flex-grow">
         <Link href="/" className="flex items-center gap-x-4">
           <Image src="/assets/img/logo.png" alt="Logo" width={35} height={35} />
@@ -54,20 +54,31 @@ export default function Header() {
         {/*  </div>*/}
         {/*</div>*/}
       </div>
-      <Bars3Icon
-        className="w-6 h-6 lg:hidden text-davysGray"
-        onClick={() => setMobileMenu(true)}
-      />
+      <div className="flex items-center gap-x-4">
+        <Bars3Icon
+          className="w-6 h-6 lg:hidden text-davysGray"
+          onClick={() => setMobileMenu(true)}
+        />
+        <Link href="/" className="font-black text-2xl text-cornflowerBlue">
+          IFeedly
+        </Link>
+      </div>
       {status === "loading" ? (
         <></>
       ) : session ? (
         <>
           <div className="flex items-center gap-x-6">
             <button
-              className="flex items-center gap-x-2 bg-cornflowerBlue text-white px-4 py-2 rounded-lg"
+              className="lg:flex items-center gap-x-2 bg-cornflowerBlue text-white px-4 py-2 rounded-lg hidden"
               onClick={() => setCreateModalIsOpen(true)}
             >
               <PlusIcon className="text-white w-5 h-5" /> Create
+            </button>
+            <button
+              className="fixed bottom-4 right-4 flex items-center justify-center bg-cornflowerBlue text-white w-10 h-10 lg:hidden rounded-full"
+              onClick={() => setCreateModalIsOpen(true)}
+            >
+              <PlusIcon className="text-white w-5 h-5" />
             </button>
             {/* TODO: make it a ui component */}
             <Menu as="div" className="relative inline-block text-left">
@@ -79,7 +90,7 @@ export default function Header() {
                     alt="Profile"
                   />
                 ) : (
-                  <div className="bg-gray-200 w-10 h-10 rounded-full flex items-center justify-center">
+                  <div className="bg-zinc-100 w-10 h-10 rounded-full flex items-center justify-center">
                     <Image
                       src="/assets/img/user.png"
                       width={30}
