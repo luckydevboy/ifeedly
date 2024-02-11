@@ -54,9 +54,9 @@ export default function Header() {
         {/*  </div>*/}
         {/*</div>*/}
       </div>
-      <div className="flex items-center gap-x-4">
+      <div className="flex lg:hidden items-center gap-x-4">
         <Bars3Icon
-          className="w-6 h-6 lg:hidden text-davysGray"
+          className="w-6 h-6 text-davysGray"
           onClick={() => setMobileMenu(true)}
         />
         <Link href="/" className="font-black text-2xl text-cornflowerBlue">
