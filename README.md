@@ -9,7 +9,7 @@ IFeedly is a news feed application containing a list of posts users can interact
 - Auth Framework: [NextAuth](https://next-auth.js.org/)
 - Motion Library: [Framer Motion](https://www.framer.com/motion/)
 
-For backend service's technologies check [this repo](https://github.com/luckydevboy/ifeedly-backend).
+For the backend service's technologies check [this repo](https://github.com/luckydevboy/ifeedly-backend).
 
 ### Screenshots
 
