@@ -1,14 +1,16 @@
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Metadata } from "next";
+import NextTopLoader from "nextjs-toploader";
 import { Nunito } from "next/font/google";
-import "./globals.css";
+import { Toaster } from "react-hot-toast";
+import React, { Suspense } from "react";
+
 import {
   NextAuthSessionProvider,
   ReactQueryProvider,
 } from "@/app/lib/providers";
-import { Toaster } from "react-hot-toast";
-import React, { Suspense } from "react";
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Metadata } from "next";
+import "./globals.css";
 
 const nunito = Nunito({ subsets: ["latin"] });
 
@@ -61,6 +63,7 @@ export default function RootLayout({
         {/* Meta Tags Generated with https://metatags.io */}
       </head>
       <body className={nunito.className}>
+        <NextTopLoader shadow={false} color="#7090E8" showSpinner={false} />
         <NextAuthSessionProvider>
           <ReactQueryProvider>
             <Suspense>{children}</Suspense>
