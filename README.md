@@ -1,4 +1,4 @@
-IFeedly is a news feed application containing a list of posts users can interact with.
+IFeedly is a social media app containing a list of posts (feeds) users can interact with.
 
 ### Technologies I've used
 
