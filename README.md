@@ -15,7 +15,7 @@ For the backend service's technologies, check [this repo](https://github.com/luc
 
 #### Virtualization
 
-I have implemented efficient rendering of large lists of posts using Tanstack's virtualization, which significantly improved the application's performance and user experience by reducing the number of DOM elements rendered at any given time.
+I have implemented efficient rendering of large lists of posts using [TanStack Virtual](https://tanstack.com/virtual/latest), which significantly improved the application's performance and user experience by reducing the number of DOM elements rendered at any given time.
 
 ### Screenshots
 
