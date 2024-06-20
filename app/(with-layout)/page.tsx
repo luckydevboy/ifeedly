@@ -26,7 +26,7 @@ export default function Home() {
   const virtualizer = useVirtualizer({
     count: hasNextPage ? allRows.length + 1 : allRows.length,
     getScrollElement: () => parentRef.current,
-    estimateSize: () => 45,
+    estimateSize: () => 145,
     overscan: 5,
   });
 
