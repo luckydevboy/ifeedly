@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Bars3Icon } from "@heroicons/react/24/solid";
 import { HomeIcon } from "@heroicons/react/24/outline";
-import { Fragment, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useClickAway } from "react-use";
 import { cx } from "class-variance-authority";
@@ -11,8 +11,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useGetProfile } from "@/app/api/hooks";
 import { signOut, useSession } from "next-auth/react";
-import { Menu, Transition } from "@headlessui/react";
-import { Button } from "@/app/components/ui";
+import { Button, DropdownMenu } from "@/app/components/ui";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
   const [mobileMenuIsOpen, setMobileMenu] = useState(false);
@@ -20,6 +20,7 @@ export default function Header() {
   const pathname = usePathname();
   const { data: session, status } = useSession();
   const { data: profile } = useGetProfile(Boolean(session));
+  const router = useRouter();
 
   useClickAway(mobileMenuRef, () => {
     setMobileMenu(false);
@@ -58,69 +59,27 @@ export default function Header() {
       ) : session ? (
         <>
           <div className="flex items-center gap-x-6">
-            {/* TODO: make it a ui component */}
-            <Menu as="div" className="relative inline-block text-left">
-              <Menu.Button className="block">
-                {profile?.image ? (
-                  <img
-                    src={profile.image}
-                    className="h-10 w-10 overflow-hidden rounded-full"
-                    alt="Profile"
-                  />
-                ) : (
-                  <Image
-                    src="/assets/img/user.png"
-                    width={40}
-                    height={40}
-                    alt="Profile"
-                  />
-                )}
-              </Menu.Button>
-              <Transition
-                as={Fragment}
-                enter="transition ease-out duration-100"
-                enterFrom="transform opacity-0 scale-95"
-                enterTo="transform opacity-100 scale-100"
-                leave="transition ease-in duration-75"
-                leaveFrom="transform opacity-100 scale-100"
-                leaveTo="transform opacity-0 scale-95"
-              >
-                <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none">
-                  <div className="p-1">
-                    <Menu.Item>
-                      {({ active }) => (
-                        <Link
-                          href="/profile"
-                          className={`${
-                            active
-                              ? "bg-cornflowerBlue text-white"
-                              : "text-cornflowerBlue"
-                          } group flex w-full items-center rounded-md px-2 py-2 text-sm font-semibold`}
-                        >
-                          Profile
-                        </Link>
-                      )}
-                    </Menu.Item>
-                  </div>
-                  <div className="p-1">
-                    <Menu.Item>
-                      {({ active }) => (
-                        <button
-                          onClick={() => signOut()}
-                          className={`${
-                            active
-                              ? "bg-cornflowerBlue text-white"
-                              : "text-cornflowerBlue"
-                          } group flex w-full items-center rounded-md px-2 py-2 text-sm font-semibold`}
-                        >
-                          Sign Out
-                        </button>
-                      )}
-                    </Menu.Item>
-                  </div>
-                </Menu.Items>
-              </Transition>
-            </Menu>
+            <DropdownMenu
+              list={[
+                { title: "Profile", onClick: () => router.push("/profile") },
+                { title: "Sign Out", onClick: () => signOut() },
+              ]}
+            >
+              {profile?.image ? (
+                <img
+                  src={profile.image}
+                  className="h-10 w-10 overflow-hidden rounded-full"
+                  alt="Profile"
+                />
+              ) : (
+                <Image
+                  src="/assets/img/user.png"
+                  width={40}
+                  height={40}
+                  alt="Profile"
+                />
+              )}
+            </DropdownMenu>
           </div>
         </>
       ) : (
