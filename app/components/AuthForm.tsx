@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRegister } from "@/app/api/hooks";
+import { Button } from "@/app/components/ui";
 
 type Props = {
   type: "signIn" | "register";
@@ -21,8 +22,11 @@ const AuthForm = ({ type }: Props) => {
   const callbackUrl = params.get("callbackUrl") || "/";
   const register = useRegister();
   const [error, setError] = useState(params.get("error") || "");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    setIsLoading(true);
+
     const urlObj = new URL(window.location.href);
     urlObj.searchParams.delete("error");
 
@@ -39,6 +43,8 @@ const AuthForm = ({ type }: Props) => {
       });
     } catch (error: any) {
       setError(error.response.data.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -142,14 +148,13 @@ const AuthForm = ({ type }: Props) => {
               </div>
             </div>
 
-            <div>
-              <button
-                type="submit"
-                className="flex w-full justify-center rounded-md bg-cornflowerBlue px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-vistaBlue focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cornflowerBlue disabled:bg-cornflowerBlue/40"
-              >
-                {type === "signIn" ? "Sign in" : "Register"}
-              </button>
-            </div>
+            <Button
+              type="submit"
+              className="w-full"
+              isLoading={isLoading || register.isPending}
+            >
+              {type === "signIn" ? "Sign in" : "Register"}
+            </Button>
           </form>
           {error === "CredentialsSignin" ? (
             <div className="text-coquelicot mt-2 text-sm">

@@ -4,7 +4,7 @@ import { Editor, EditorState, convertToRaw } from "draft-js";
 import { useEffect, useRef, useState } from "react";
 import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
 import "draft-js/dist/Draft.css";
-import { cx } from "class-variance-authority";
+import { Button } from "@/app/components/ui";
 
 type Props = {
   onSubmit: (data: string) => void;
@@ -13,12 +13,7 @@ type Props = {
   placeholder: string;
 };
 
-export default function Composer({
-  onSubmit,
-  isLoading,
-  buttonPosition = "inside",
-  placeholder,
-}: Props) {
+export default function Composer({ onSubmit, isLoading, placeholder }: Props) {
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty(),
   );
@@ -55,31 +50,16 @@ export default function Composer({
             ref={editorRef}
           />
         )}
-        {buttonPosition === "inside" && (
-          <button
-            className={cx([
-              "bg-cornflowerBlue p-2 rounded-full self-end disabled:bg-cornflowerBlue/40 relative",
-              isLoading && "animate-pulse",
-            ])}
-            disabled={!text}
-            onClick={handleSubmit}
-          >
-            <PaperAirplaneIcon className="w-4 h-4 text-white" />
-          </button>
-        )}
-      </div>
-      {buttonPosition === "outside" && (
-        <button
-          className={cx([
-            "bg-cornflowerBlue py-2 px-4 disabled:bg-cornflowerBlue/30 rounded-lg self-end mt-2 text-white",
-            isLoading && "animate-pulse",
-          ])}
-          disabled={!text}
+        <Button
+          className="self-end"
+          circular
+          disabled={!text || isLoading}
           onClick={handleSubmit}
+          isLoading={isLoading}
         >
-          Create
-        </button>
-      )}
+          <PaperAirplaneIcon className="w-4 h-4 text-white" />
+        </Button>
+      </div>
     </div>
   );
 }

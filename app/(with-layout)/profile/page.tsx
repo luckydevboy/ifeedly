@@ -3,6 +3,7 @@
 import { useGetProfile, useUpdateUser } from "@/app/api/hooks";
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { Button } from "@/app/components/ui";
 
 export default function Profile() {
   const { data: profile, isLoading, refetch } = useGetProfile(true);
@@ -109,12 +110,7 @@ export default function Profile() {
         {/*    />*/}
         {/*  </div>*/}
         {/*</div>*/}
-        <button
-          className="bg-cornflowerBlue text-white px-16 py-2 rounded-lg hover:bg-vistaBlue self-end"
-          type="submit"
-        >
-          Edit
-        </button>
+        <Button type="submit">Edit</Button>
       </div>
     </form>
   );

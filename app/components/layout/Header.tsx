@@ -1,18 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import {
-  Bars3Icon,
-  MagnifyingGlassIcon,
-  PlusIcon,
-} from "@heroicons/react/24/solid";
-import {
-  BellIcon,
-  HomeIcon,
-  InboxIcon,
-  UserCircleIcon,
-} from "@heroicons/react/24/outline";
-import { CreatePostModal } from "@/app/components";
+import { Bars3Icon } from "@heroicons/react/24/solid";
+import { HomeIcon } from "@heroicons/react/24/outline";
 import { Fragment, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useClickAway } from "react-use";
@@ -22,14 +12,14 @@ import { usePathname } from "next/navigation";
 import { useGetProfile } from "@/app/api/hooks";
 import { signOut, useSession } from "next-auth/react";
 import { Menu, Transition } from "@headlessui/react";
+import { Button } from "@/app/components/ui";
 
 export default function Header() {
-  const [createModalIsOpen, setCreateModalIsOpen] = useState(false);
   const [mobileMenuIsOpen, setMobileMenu] = useState(false);
   const mobileMenuRef = useRef(null);
   const pathname = usePathname();
   const { data: session, status } = useSession();
-  const { data: profile, isLoading } = useGetProfile(Boolean(session));
+  const { data: profile } = useGetProfile(Boolean(session));
 
   useClickAway(mobileMenuRef, () => {
     setMobileMenu(false);
@@ -68,18 +58,6 @@ export default function Header() {
       ) : session ? (
         <>
           <div className="flex items-center gap-x-6">
-            <button
-              className="lg:flex items-center gap-x-2 bg-cornflowerBlue text-white px-4 py-2 rounded-lg hidden"
-              onClick={() => setCreateModalIsOpen(true)}
-            >
-              <PlusIcon className="text-white w-5 h-5" /> Create
-            </button>
-            <button
-              className="fixed bottom-4 right-4 flex items-center justify-center bg-cornflowerBlue text-white w-10 h-10 lg:hidden rounded-full"
-              onClick={() => setCreateModalIsOpen(true)}
-            >
-              <PlusIcon className="text-white w-5 h-5" />
-            </button>
             {/* TODO: make it a ui component */}
             <Menu as="div" className="relative inline-block text-left">
               <Menu.Button className="block">
@@ -151,11 +129,8 @@ export default function Header() {
           </div>
         </>
       ) : (
-        <Link
-          className="bg-cornflowerBlue text-white px-4 py-2 rounded-lg hover:bg-cornflowerBlue/90"
-          href={`/sign-in?callbackUrl=${pathname}`}
-        >
-          Login
+        <Link href={`/sign-in?callbackUrl=${pathname}`}>
+          <Button>Login</Button>
         </Link>
       )}
       <AnimatePresence>
@@ -205,10 +180,6 @@ export default function Header() {
           </>
         )}
       </AnimatePresence>
-      <CreatePostModal
-        isOpen={createModalIsOpen}
-        onClose={() => setCreateModalIsOpen(false)}
-      />
     </header>
   );
 }
