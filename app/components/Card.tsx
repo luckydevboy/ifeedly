@@ -94,7 +94,7 @@ export default function Card({
             href={`posts/${_id}`}
             className="text-zinc-800 mt-4 lg:mt-0 block"
           >
-            {content}
+            <p className="line-clamp-3">{content}</p>
           </Link>
         )}
         <div className="flex items-center gap-x-4">
