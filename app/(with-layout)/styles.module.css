@@ -1,6 +1,7 @@
 .parent {
-  height: calc(100vh - 225px);
+  height: calc(100vh - 249px);
   overflow: auto;
+  margin-top: 2rem;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */

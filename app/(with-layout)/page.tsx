@@ -16,8 +16,6 @@ export default function Home() {
     hasNextPage,
     fetchNextPage,
     refetch,
-    error,
-    status,
   } = useGetPosts();
   const createPost = useCreatePost();
 
@@ -62,12 +60,18 @@ export default function Home() {
   };
 
   return (
-    <main className="space-y-4">
+    <main>
       <Composer
         onSubmit={addNewPost}
         isLoading={createPost.isPending}
         placeholder="Share your knowledge..."
       />
+
+      {!data && isFetching && (
+        <div className="text-center">
+          <BeatLoader size={10} color="#7090E8" className="my-4" />
+        </div>
+      )}
 
       <div ref={parentRef} className={styles.parent}>
         {/* The large inner element to hold all the items */}
@@ -79,22 +83,41 @@ export default function Home() {
           }}
         >
           {/* Only the visible items in the virtualizer, manually positioned to be in view */}
-          {rowVirtualizer.getVirtualItems().map((virtualItem) => (
-            <div
-              key={virtualItem.key}
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: `${virtualItem.size}px`,
-                transform: `translateY(${virtualItem.start}px)`,
-              }}
-            >
-              <Card {...allRows[virtualItem.index]} type="post" />
-              <hr className="absolute w-full bottom-5 border-zinc-100" />
-            </div>
-          ))}
+          {rowVirtualizer.getVirtualItems().map((virtualItem) => {
+            const isLoaderRow = virtualItem.index > allRows.length - 1;
+            const post = allRows[virtualItem.index];
+
+            return (
+              <div
+                key={virtualItem.key}
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: `${virtualItem.size}px`,
+                  transform: `translateY(${virtualItem.start}px)`,
+                }}
+              >
+                {isLoaderRow ? (
+                  hasNextPage ? (
+                    <div className="text-center">
+                      <BeatLoader size={10} color="#7090E8" className="my-4" />
+                    </div>
+                  ) : (
+                    "Nothing more to load"
+                  )
+                ) : (
+                  <>
+                    <Card {...post} type="post" />
+                    {virtualItem.index !== allRows.length - 1 && (
+                      <hr className="absolute w-full bottom-5 border-zinc-100" />
+                    )}
+                  </>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
     </main>
