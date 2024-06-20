@@ -70,14 +70,13 @@ export default function Card({
           className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0"
         />
       ) : (
-        <div className="bg-zinc-100 w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0">
-          <Image
-            src="/assets/img/user.png"
-            width={30}
-            height={30}
-            alt="Profile"
-          />
-        </div>
+        <Image
+          src="/assets/img/user.png"
+          width={40}
+          height={40}
+          alt="Profile"
+          className="flex-shrink-0 w-10 h-10"
+        />
       )}
       <div className="space-y-4">
         <div className="flex flex-col lg:flex-row lg:items-center gap-x-2">

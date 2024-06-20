@@ -68,14 +68,12 @@ export default function Header() {
                     alt="Profile"
                   />
                 ) : (
-                  <div className="bg-zinc-100 w-10 h-10 rounded-full flex items-center justify-center">
-                    <Image
-                      src="/assets/img/user.png"
-                      width={30}
-                      height={30}
-                      alt="Profile"
-                    />
-                  </div>
+                  <Image
+                    src="/assets/img/user.png"
+                    width={40}
+                    height={40}
+                    alt="Profile"
+                  />
                 )}
               </Menu.Button>
               <Transition
@@ -123,9 +121,6 @@ export default function Header() {
                 </Menu.Items>
               </Transition>
             </Menu>
-            {/*<InboxIcon className="w-6 h-6 text-davysGray" />*/}
-            {/*<div className="border-r border-antiFlashWhite h-6 w-1" />*/}
-            {/*<BellIcon className="w-6 h-6 text-davysGray" />*/}
           </div>
         </>
       ) : (
