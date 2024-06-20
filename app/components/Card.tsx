@@ -14,7 +14,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 
-interface Props extends PostWithCommentsCount {
+interface Props extends Partial<PostWithCommentsCount> {
   type: "post" | "comment";
 }
 
@@ -26,14 +26,14 @@ export default function Card({
   _id,
   type,
 }: Props) {
-  const [likes, setLikes] = useState(reactions.likes);
-  const [liked, setLiked] = useState(reactions.isLiked);
+  const [likes, setLikes] = useState(reactions?.likes);
+  const [liked, setLiked] = useState(reactions?.isLiked);
   const likePost = useLikePost();
   const pathname = usePathname();
   const inPostsPage = pathname.includes("posts");
 
   const handleLike = () => {
-    if (type === "post") {
+    if (type === "post" && likes && _id) {
       if (liked) {
         likePost.mutateAsync(_id).then(() => {
           setLikes(likes - 1);
@@ -63,9 +63,9 @@ export default function Card({
 
   return (
     <div className="flex gap-x-2">
-      {author.image ? (
+      {author?.image ? (
         <img
-          src={author.image}
+          src={author?.image}
           alt="Avatar"
           className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0"
         />
@@ -81,10 +81,10 @@ export default function Card({
       )}
       <div className="space-y-4">
         <div className="flex flex-col lg:flex-row lg:items-center gap-x-2">
-          <div className="font-bold text-sm">{author.name}</div>
-          <div className="text-xs text-davysGray">{author.username}</div>
+          <div className="font-bold text-sm">{author?.name}</div>
+          <div className="text-xs text-davysGray">{author?.username}</div>
           <div className="text-xs text-davysGray">
-            {formatDistanceToNow(createdAt)}
+            {formatDistanceToNow(createdAt ?? Date.now())}
           </div>
         </div>
         {inPostsPage ? (
@@ -119,7 +119,7 @@ export default function Card({
           <div className="flex items-center gap-x-1">
             <ChatBubbleLeftRightIcon className="text-davysGray h-4 w-4" />
             <span className="text-davysGray text-sm font-medium">
-              {reactions.comments}
+              {reactions?.comments}
             </span>
           </div>
           <ShareIcon
