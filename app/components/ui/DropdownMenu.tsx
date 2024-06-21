@@ -22,7 +22,7 @@ const DropdownMenu = ({ children, list }: Props) => {
       >
         <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none">
           {list.map((item, index) => (
-            <div className="p-1">
+            <div className="p-1" key={index}>
               <Menu.Item key={index}>
                 {({ active }) => (
                   <button
