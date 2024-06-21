@@ -8,11 +8,11 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useClickAway } from "react-use";
 import { cx } from "class-variance-authority";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useGetProfile } from "@/app/api/hooks";
 import { signOut, useSession } from "next-auth/react";
+import { usePathname, useRouter } from "next/navigation";
+
+import { useGetProfile } from "@/app/api/hooks";
 import { Button, DropdownMenu } from "@/app/components/ui";
-import { useRouter } from "next/navigation";
 
 export default function Header() {
   const [mobileMenuIsOpen, setMobileMenu] = useState(false);

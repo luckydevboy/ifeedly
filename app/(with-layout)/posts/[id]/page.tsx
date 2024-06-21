@@ -1,10 +1,11 @@
 "use client";
 
-import { useCreateComment, useGetPost } from "@/app/api/hooks";
-import { Composer, Card } from "@/app/components";
 import React from "react";
 import toast from "react-hot-toast";
 import { BeatLoader } from "react-spinners";
+
+import { useCreateComment, useGetPost } from "@/app/api/hooks";
+import { Composer, Card } from "@/app/components";
 
 const Post = ({ params }: { params: { id: string } }) => {
   const { data: post, isLoading, refetch } = useGetPost(params.id);

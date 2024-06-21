@@ -4,6 +4,7 @@ import { Editor, EditorState, convertToRaw } from "draft-js";
 import { useEffect, useRef, useState } from "react";
 import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
 import "draft-js/dist/Draft.css";
+
 import { Button } from "@/app/components/ui";
 
 type Props = {

@@ -1,4 +1,5 @@
 import { useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query";
+
 import {
   getPosts,
   createPost,

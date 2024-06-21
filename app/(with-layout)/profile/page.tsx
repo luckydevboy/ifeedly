@@ -1,8 +1,9 @@
 "use client";
 
-import { useGetProfile, useUpdateUser } from "@/app/api/hooks";
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import toast from "react-hot-toast";
+
+import { useGetProfile, useUpdateUser } from "@/app/api/hooks";
 import { Button, Input } from "@/app/components/ui";
 
 export default function Profile() {

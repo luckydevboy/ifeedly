@@ -1,5 +1,6 @@
-import { axios } from "@/app/api/axiosInstance";
 import { AxiosResponse } from "axios";
+
+import { axios } from "@/app/api/axiosInstance";
 import { User } from "@/app/lib/definitions";
 
 export const getProfile = (): Promise<

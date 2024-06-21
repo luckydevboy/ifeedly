@@ -1,6 +1,7 @@
+import { AxiosResponse } from "axios";
+
 import { axios } from "../axiosInstance";
 import { PostWithComments, PostWithCommentsCount } from "@/app/lib/definitions";
-import { AxiosResponse } from "axios";
 
 export async function getPosts({
   page,

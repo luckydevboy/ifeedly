@@ -1,4 +1,3 @@
-import { PostWithCommentsCount } from "@/app/lib/definitions";
 import { formatDistanceToNow } from "date-fns";
 import {
   ChatBubbleLeftRightIcon,
@@ -7,12 +6,14 @@ import {
 } from "@heroicons/react/24/outline";
 import { HeartIcon as HeartIconSolid } from "@heroicons/react/24/solid";
 import { useState } from "react";
-import { useLikePost } from "@/app/api/hooks";
 import { cx } from "class-variance-authority";
 import toast from "react-hot-toast";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+
+import { PostWithCommentsCount } from "@/app/lib/definitions";
+import { useLikePost } from "@/app/api/hooks";
 
 interface Props extends Partial<PostWithCommentsCount> {
   type: "post" | "comment";

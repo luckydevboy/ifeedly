@@ -1,11 +1,12 @@
 "use client";
 
-import { Card, Composer } from "@/app/components";
 import React, { useEffect, useRef } from "react";
-import { useGetPosts, useCreatePost } from "@/app/api/hooks";
 import toast from "react-hot-toast";
 import { BeatLoader } from "react-spinners";
 import { useVirtualizer } from "@tanstack/react-virtual";
+
+import { useGetPosts, useCreatePost } from "@/app/api/hooks";
+import { Card, Composer } from "@/app/components";
 import styles from "./styles.module.css";
 
 export default function Home() {
