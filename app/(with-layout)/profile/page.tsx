@@ -1,44 +1,42 @@
 "use client";
 
-import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import toast from "react-hot-toast";
 
 import { useGetProfile, useUpdateUser } from "@/app/api/hooks";
 import { Button, Input } from "@/app/components/ui";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+
+type Inputs = {
+  username: string;
+  password: string;
+  name: string;
+};
 
 export default function Profile() {
-  const { data: profile, isLoading, refetch } = useGetProfile(true);
+  const {
+    register: formRegister,
+    handleSubmit,
+    formState: { errors },
+    control,
+    setValue,
+  } = useForm<Inputs>();
+  const { data: profile, isFetching, refetch } = useGetProfile(true);
   const updateUser = useUpdateUser();
-  const [formData, setFormData] = useState({
-    username: "",
-    name: "",
-  });
 
   useEffect(() => {
     if (profile) {
-      setFormData({
-        username: profile?.username,
-        name: profile?.name,
-      });
+      setValue("username", profile.username);
+      setValue("name", profile.name);
     }
   }, [profile]);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
-      e.preventDefault();
-
-      if (Object.values(formData).some((field) => !Boolean(field))) {
-        return toast.error("At least one field is required!");
-      }
-
       if (profile) {
-        await updateUser.mutateAsync({ userId: profile._id, data: formData });
+        await updateUser.mutateAsync({ userId: profile._id, data });
         toast.success("Update successfully done.");
-        refetch();
+        await refetch();
       }
     } catch (error: any) {
       // TODO: Handle errors like this
@@ -51,31 +49,41 @@ export default function Profile() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <h1 className="font-bold text-2xl">Profile</h1>
       <hr className="border-seaSalt my-4" />
       <div className="flex flex-col gap-y-6">
-        <Input
-          value={formData.name}
-          onChange={handleChange}
-          id="name"
+        <Controller
+          render={({ field }) => (
+            <Input
+              {...field}
+              type="text"
+              label="Name"
+              disabled={isFetching || updateUser.isPending}
+              required
+            />
+          )}
           name="name"
-          type="text"
-          disabled={isLoading || updateUser.isPending}
-          label="Name"
+          control={control}
         />
 
-        <Input
-          value={formData.username}
-          onChange={handleChange}
-          id="username"
+        <Controller
+          render={({ field }) => (
+            <Input
+              {...field}
+              type="text"
+              label="Username"
+              disabled={isFetching || updateUser.isPending}
+              required
+            />
+          )}
           name="username"
-          type="text"
-          disabled={isLoading || updateUser.isPending}
-          label="Username"
+          control={control}
         />
 
-        <Button type="submit">Edit</Button>
+        <Button type="submit" isLoading={updateUser.isPending}>
+          Edit
+        </Button>
       </div>
     </form>
   );
